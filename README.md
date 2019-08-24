@@ -1,6 +1,57 @@
 # VPN_server
 VPN server with a client side dashboard
 
+1. Worked back OpenVPN folders.
+2. Install Raspian Lite.
+3. Install UFW.
+4. Set up superuser:  https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+5. Set up OpenVPN: https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-18-04#step-1-%E2%80%94-installing-openvpn-and-easyrsa
+6. Make Client Portal
+7. Add Auth
+8. Add Metrics.
+
+
+### Set up a superuser with reduced scope
+
+-SSH Keys vs. password authentication for root access?
+
+### Set up Uncomplicated Firewall.
+
+-install ufw
+
+### Install OpenVPN
+
+### Writing Keys
+
+```
+./easyrsa init-pki
+./easyrsa build-ca
+./easyrsa gen-req server nopass
+./easyrsa sign-req server server
+ openssl dhparam -out dh2048.pem 2048
+```
+
+### Writing Client Keys
+
+-Make client directory
+-Generate client key/req
+-Sign client key/req
+-Send cert to client config file
+
+### Configure OpenVPN Service
+
+-Add an HMAC Firewall
+
+### Tweak Networking Configuration
+
+- IP forwarding
+- Configure UFW
+  - find the ip address: `ip route | grep default`
+
+### Start the Server
+
+### Create Client Configuration Infrastructure 
+
 ## 1. Server on Raspberry Pi
   - Public IP address
   - Dynamic DNS
@@ -51,16 +102,6 @@ RX packets 3267  bytes 656113 (640.7 KiB)
 RX errors 0  dropped 0  overruns 0  frame 0
 TX packets 1420  bytes 207695 (202.8 KiB)
 TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-### Writing Keys
-
-```
-./easyrsa init-pki
-./easyrsa build-ca
-./easyrsa gen-req server nopass
-./easyrsa sign-req server server
- openssl dhparam -out dh2048.pem 2048
-```
 
 check status
 
